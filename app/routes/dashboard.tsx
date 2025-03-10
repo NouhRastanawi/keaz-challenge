@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useLoaderData } from "react-router";
 import ContactsChart from "~/components/ContactsChart";
 import ContactSourcesChart from "~/components/ContactSourcesChart";
+import ShopifyRevenueChart from "~/components/ShopifyRevenueChart";
 
 export const clientLoader = async () => {
   return {
@@ -44,16 +45,19 @@ export const clientLoader = async () => {
 const Dashboard = () => {
   const data = useLoaderData<typeof clientLoader>();
 
-  const [selectedChart, setSelectedChart] = useState<"contacts" | "sources">("contacts");
+  const [selectedChart, setSelectedChart] = useState<"contacts" | "sources" | "revenue">(
+    "contacts"
+  );
 
-  console.log(data.support);
-  console.table(data.shopifyRevenue);
-  console.table(data.contacts);
-  console.table(data.contactSources);
+  //   console.log(data.support);
+  //   console.table(data.shopifyRevenue);
+  //   console.table(data.contacts);
+  //   console.table(data.contactSources);
 
   return (
     <div className="w-full max-w-4xl mx-auto md:p-4 p-1">
-      <div className="flex justify-center gap-4 sm:mb-6 mb-3">
+      {/* Chart Selection Buttons */}
+      <div className="flex justify-center flex-wrap gap-4 sm:mb-6 mb-3">
         <button
           className={`px-4 py-2 rounded-xl ${
             selectedChart === "contacts"
@@ -65,7 +69,7 @@ const Dashboard = () => {
           Contacts Over Time
         </button>
         <button
-          className={`px-4 py-2 rounded-xl ${
+          className={`sm:px-4 px-2 py-2 rounded-xl ${
             selectedChart === "sources"
               ? "bg-white border-2 border-[#a7a7a7]"
               : "bg-neutral-200 text-secondary hover:opacity-60 hover:cursor-pointer"
@@ -74,12 +78,24 @@ const Dashboard = () => {
         >
           Contact Sources
         </button>
+        <button
+          className={`px-4 py-2 rounded-xl ${
+            selectedChart === "revenue"
+              ? "bg-white border-2 border-[#a7a7a7]"
+              : "bg-neutral-200 text-secondary hover:opacity-60 hover:cursor-pointer"
+          }`}
+          onClick={() => setSelectedChart("revenue")}
+        >
+          Shopify Revenue
+        </button>
       </div>
 
       {/* Divider */}
       <div className="w-full border-t-2 border-gray-300 mb-6"></div>
 
-      {selectedChart === "contacts" ? <ContactsChart /> : <ContactSourcesChart />}
+      {selectedChart === "contacts" && <ContactsChart />}
+      {selectedChart === "sources" && <ContactSourcesChart />}
+      {selectedChart === "revenue" && <ShopifyRevenueChart />}
     </div>
   );
 };
