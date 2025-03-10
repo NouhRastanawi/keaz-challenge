@@ -15,21 +15,23 @@ const ContactsChart: React.FC = () => {
   }));
 
   return (
-    <div className="w-full max-w-4xl mx-auto md:p-4 p-2">
+    <div className="w-full max-w-4xl mx-auto md:p-4 p-2 ">
       <h2 className="text-xl font-semibold text-center mb-4">Weekly Contact Trends</h2>
-      <div className="flex justify-center mb-4">
+
+      <div className="flex justify-end mb-4">
         <button
-          className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600 transition-all"
+          // className="px-4 py-2 text-white bg-blue-500 rounded-xl hover:bg-blue-600 hover:cursor-pointer transition-all"
+          className="px-4 py-2 bg-white border-2 border-[#a7a7a7] rounded-xl hover:opacity-60 hover:cursor-pointer transition-all"
           onClick={() => setShowLastWeek(!showLastWeek)}
         >
           {showLastWeek ? "Hide Last Week" : "Show Last Week"}
         </button>
       </div>
-      <div className="w-full h-[300px] sm:h-[400px]">
+      <div className="w-full h-[260px] sm:h-[400px]">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={chartData}>
             <XAxis dataKey="day" />
-            <YAxis />
+            <YAxis width={35} />
             <Tooltip />
             <Legend />
             {showLastWeek && (
