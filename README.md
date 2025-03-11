@@ -1,3 +1,5 @@
+Check it live:
+https://data-visualization-keaz.netlify.app/
 # Keaz frontend code challenge
 
 Welcome, and thank you for your interest in joining our team as a Junior Frontend Developer!
